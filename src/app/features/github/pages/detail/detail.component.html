@@ -1,0 +1,19 @@
+<div *ngIf="user" class="container-fluid mt-5">
+    <div class="mb-3">
+        <h2>{{user.login}}</h2>
+        <h4>{{user.bio}}</h4>
+    </div>
+    <div class="d-flex">
+        <div style="margin-right: 25px;">
+            <img src="{{user.avatar_url}}" alt="">
+        </div>
+        <div>
+            <h3 class="fw-bold">Datos Generales</h3>
+            <div class="detail">
+                <p><span class="fw-bold">Blog: </span>{{user.blog || 'N/A'}}</p>
+                <p><span class="fw-bold">Ubicacion: </span>{{user.location || 'N/A'}}</p>
+                <p><span class="fw-bold">Fecha de creacion: </span>{{(user.created_at | date: 'dd-MM-yyyy') || 'N/A'}}</p>
+            </div>
+        </div>
+    </div>
+</div>

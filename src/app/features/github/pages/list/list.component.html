@@ -1,0 +1,41 @@
+<mat-form-field appearance="fill" class="input" [formGroup]="form">
+    <input matInput placeholder="Buscar perfil" formControlName="search" />
+    <mat-icon matPrefix>search</mat-icon>
+    <mat-error *ngIf="form.get('search')?.invalid && 
+        form.get('search')?.errors && 
+        (form.get('search')?.dirty || form.get('search')?.touched)">
+        @if (form.get('search')?.hasError('minlength')) { La busqueda debe contener un minimo de 4 caracteres! }
+        @else if (form.get('search')?.hasError('reservedWordInvalid')) { No puede realizar la busqueda para “MaxiGlobal”! }
+    </mat-error>
+</mat-form-field>
+@if (!isLoading) {
+    <div class="row">
+        <mat-list class="col-6">
+            @for (user of data; track $index) {
+                <mat-list-item>
+                    <img
+                        matListItemAvatar
+                        src="{{user.avatar_url}}"
+                        alt="Github profile photo"
+                    />
+                    <div mat-line>
+                        <a [routerLink]="['/detalle', user.login]" [queryParams]="{score:user.score}">{{user.login}}</a>
+                    </div>
+                    <div mat-line>{{user.id}}</div>
+                </mat-list-item>
+            }
+        </mat-list> 
+        <div class="col-6">
+            <canvas id="myChart">{{ chart }}</canvas>
+        </div>
+    </div>
+} @else {
+    <mat-spinner style="margin:0 auto;" 
+    mode="indeterminate"></mat-spinner>
+}
+
+<div>
+    <canvas id="myChart">{{ chart }}</canvas>
+</div>
+
+
